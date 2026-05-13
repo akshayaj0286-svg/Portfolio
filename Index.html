@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akshaya Janakiraman — Sales Finance Analyst</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:     #E60023;
+      --red-dark:#AD081B;
+      --cream:   #FFF9F5;
+      --dark:    #111010;
+      --mid:     #3D3535;
+      --muted:   #7A6E6E;
+      --border:  #E8DFDA;
+      --card:    #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(255,249,245,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--dark); text-decoration: none;
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--mid);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 120px 48px 80px;
+      gap: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -120px; right: -180px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(230,0,35,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--red);
+      border: 1px solid var(--red); border-radius: 20px;
+      padding: 5px 14px; margin-bottom: 24px;
+      opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 900; line-height: 1.08;
+      color: var(--dark);
+      opacity: 0; animation: fadeUp 0.6s 0.35s forwards;
+    }
+    .hero h1 em {
+      font-style: italic; color: var(--red);
+    }
+    .hero-sub {
+      margin-top: 24px;
+      font-size: 1.05rem; line-height: 1.7;
+      color: var(--muted); max-width: 460px;
+      opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
+    }
+    .hero-btns {
+      margin-top: 40px; display: flex; gap: 16px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.6s 0.65s forwards;
+    }
+    .btn-primary {
+      background: var(--red); color: #fff;
+      padding: 14px 32px; border-radius: 8px;
+      font-size: 0.9rem; font-weight: 500;
+      text-decoration: none; transition: background 0.2s, transform 0.15s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent; color: var(--dark);
+      padding: 14px 32px; border-radius: 8px;
+      border: 1.5px solid var(--border);
+      font-size: 0.9rem; font-weight: 500;
+      text-decoration: none; transition: border-color 0.2s, transform 0.15s;
+    }
+    .btn-secondary:hover { border-color: var(--dark); transform: translateY(-2px); }
+
+    /* Hero right — stats card */
+    .hero-right {
+      opacity: 0; animation: fadeUp 0.6s 0.45s forwards;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+    }
+    .stat-card-title {
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 28px;
+    }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .stat-item {}
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem; font-weight: 900;
+      color: var(--dark); line-height: 1;
+    }
+    .stat-number span { color: var(--red); }
+    .stat-label {
+      font-size: 0.8rem; color: var(--muted);
+      margin-top: 6px; line-height: 1.4;
+    }
+    .divider-line {
+      width: 100%; height: 1px;
+      background: var(--border); margin: 28px 0;
+    }
+    .skills-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 0.78rem; font-weight: 500;
+      padding: 5px 12px; border-radius: 20px;
+      background: #F5EFEC; color: var(--mid);
+    }
+    .chip.red { background: rgba(230,0,35,0.08); color: var(--red); }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 48px; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 900; line-height: 1.1;
+      color: var(--dark); margin-bottom: 48px;
+    }
+    .section-title em { font-style: italic; color: var(--red); }
+
+    /* ── ABOUT ── */
+    #about { background: var(--dark); color: #fff; }
+    #about .section-title { color: #fff; }
+    #about .section-label { color: #E8A0A8; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: start;
+    }
+    .about-text {
+      font-size: 1.05rem; line-height: 1.85;
+      color: rgba(255,255,255,0.75);
+    }
+    .about-text p + p { margin-top: 20px; }
+    .about-text strong { color: #fff; font-weight: 500; }
+    .about-right { display: flex; flex-direction: column; gap: 20px; }
+    .about-pill {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 22px 28px;
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .pill-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(230,0,35,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .pill-title { font-weight: 500; color: #fff; font-size: 0.95rem; }
+    .pill-desc { font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-top: 4px; line-height: 1.5; }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--cream); }
+    .exp-timeline { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 200px 1px 1fr;
+      gap: 0 32px;
+      padding-bottom: 52px;
+    }
+    .exp-item:last-child { padding-bottom: 0; }
+    .exp-meta { text-align: right; padding-top: 4px; }
+    .exp-date {
+      font-size: 0.8rem; font-weight: 500; color: var(--red);
+      letter-spacing: 0.05em;
+    }
+    .exp-company {
+      font-size: 0.82rem; color: var(--muted);
+      margin-top: 4px; line-height: 1.4;
+    }
+    .exp-line {
+      width: 1px;
+      background: linear-gradient(to bottom, var(--red), var(--border));
+      position: relative;
+    }
+    .exp-line::before {
+      content: '';
+      position: absolute; top: 6px; left: 50%;
+      transform: translateX(-50%);
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 0 3px var(--cream), 0 0 0 5px rgba(230,0,35,0.2);
+    }
+    .exp-content { padding-top: 0; padding-left: 0; }
+    .exp-role {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 700; color: var(--dark);
+    }
+    .exp-desc {
+      margin-top: 14px;
+      font-size: 0.9rem; line-height: 1.75; color: var(--mid);
+    }
+    .exp-ps { margin-top: 12px; }
+    .ps-label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .ps-label.problem { color: var(--red-dark); }
+    .ps-label.solution { color: #1A7F5A; }
+    .ps-text {
+      font-size: 0.88rem; line-height: 1.7; color: var(--mid);
+      margin-top: 3px; margin-bottom: 12px;
+    }
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; }
+    .exp-tag {
+      font-size: 0.75rem; padding: 4px 10px; border-radius: 14px;
+      background: #F0EAE6; color: var(--mid); font-weight: 500;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: #F7F1EE; }
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px;
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .project-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), var(--red-dark));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+    .project-card:hover::after { transform: scaleX(1); }
+    .project-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem; font-weight: 900;
+      color: rgba(230,0,35,0.08);
+      line-height: 1; margin-bottom: 12px;
+    }
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; color: var(--dark);
+      line-height: 1.3; margin-bottom: 12px;
+    }
+    .project-tools {
+      font-size: 0.78rem; color: var(--red); font-weight: 500;
+      letter-spacing: 0.05em; margin-bottom: 16px;
+    }
+    .project-desc {
+      font-size: 0.88rem; line-height: 1.7; color: var(--mid);
+    }
+    .project-outcome {
+      margin-top: 16px;
+      background: rgba(230,0,35,0.05);
+      border-left: 3px solid var(--red);
+      padding: 10px 14px;
+      font-size: 0.84rem; color: var(--mid); line-height: 1.6;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--cream); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .skill-group {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px;
+    }
+    .skill-group-title {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 18px;
+    }
+    .skill-list { display: flex; flex-direction: column; gap: 10px; }
+    .skill-row { display: flex; align-items: center; justify-content: space-between; }
+    .skill-name { font-size: 0.88rem; color: var(--mid); }
+    .skill-bar {
+      width: 100px; height: 5px;
+      background: var(--border); border-radius: 3px; overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%; background: var(--red); border-radius: 3px;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.8s ease;
+    }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--dark); }
+    #education .section-title { color: #fff; }
+    #education .section-label { color: #E8A0A8; }
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .edu-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; padding: 36px;
+    }
+    .edu-badge {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--red);
+      background: rgba(230,0,35,0.12); border-radius: 14px;
+      padding: 4px 12px; margin-bottom: 18px;
+    }
+    .edu-degree {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; color: #fff;
+      line-height: 1.35; margin-bottom: 8px;
+    }
+    .edu-school {
+      font-size: 0.88rem; color: rgba(255,255,255,0.5); margin-bottom: 4px;
+    }
+    .edu-dates {
+      font-size: 0.82rem; color: rgba(255,255,255,0.35);
+    }
+    .edu-modules {
+      margin-top: 20px;
+      font-size: 0.82rem; color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+    }
+    .edu-modules strong { color: rgba(255,255,255,0.65); font-weight: 500; }
+    .honours-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 14px;
+      font-size: 0.78rem; font-weight: 600;
+      color: #F5C842; background: rgba(245,200,66,0.1);
+      border: 1px solid rgba(245,200,66,0.25);
+      border-radius: 14px; padding: 5px 12px;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--red); color: #fff; text-align: center; }
+    #contact .section-title { color: #fff; margin-bottom: 16px; }
+    #contact .section-label { color: rgba(255,255,255,0.6); }
+    .contact-sub {
+      font-size: 1.05rem; color: rgba(255,255,255,0.75);
+      max-width: 500px; margin: 0 auto 40px; line-height: 1.7;
+    }
+    .contact-links {
+      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+    }
+    .contact-btn {
+      background: #fff; color: var(--red);
+      padding: 14px 32px; border-radius: 8px;
+      font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .contact-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .contact-btn.outline {
+      background: transparent; color: #fff;
+      border: 2px solid rgba(255,255,255,0.5);
+    }
+    .contact-btn.outline:hover { border-color: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark); color: rgba(255,255,255,0.35);
+      text-align: center; padding: 28px 48px;
+      font-size: 0.82rem;
+    }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s, transform 0.6s;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 48px; }
+      .about-grid, .edu-grid { grid-template-columns: 1fr; gap: 40px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 8px; }
+      .exp-meta { text-align: left; }
+      .exp-line { display: none; }
+      section { padding: 70px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">AJ<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <span class="hero-tag">Open to Opportunities · Dublin, Ireland</span>
+    <h1>Finance meets<br><em>Data Science.</em></h1>
+    <p class="hero-sub">
+      M.Sc. Financial Data Science candidate at UCD — turning complex financial datasets into revenue insights, forecasting models, and executive-ready decisions.
+    </p>
+    <div class="hero-btns">
+      <a href="#experience" class="btn-primary">View My Work →</a>
+      <a href="mailto:akshayaj0286@gmail.com" class="btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-card">
+      <p class="stat-card-title">At a Glance</p>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">15<span>%</span></div>
+          <div class="stat-label">Improvement in KPI tracking accuracy delivered</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100<span>k+</span></div>
+          <div class="stat-label">Financial transactions reconciled end-to-end</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">35<span>%</span></div>
+          <div class="stat-label">Reporting efficiency gained through automation</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50<span>+</span></div>
+          <div class="stat-label">Global issuers analysed in ESG bond research</div>
+        </div>
+      </div>
+      <div class="divider-line"></div>
+      <div class="skills-chips">
+        <span class="chip red">Revenue Forecasting</span>
+        <span class="chip red">SQL</span>
+        <span class="chip red">Power BI</span>
+        <span class="chip">Python</span>
+        <span class="chip">FP&A</span>
+        <span class="chip">Tableau</span>
+        <span class="chip">Financial Modelling</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label reveal">About Me</div>
+  <div class="section-title reveal">Analytical by training.<br><em>Strategic</em> by instinct.</div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>
+        I am Akshaya — a <strong>Financial Data Science graduate student at UCD Michael Smurfit</strong> with a background that sits at the intersection of data engineering and finance. I do not just clean data; I use it to answer the questions that matter to senior stakeholders.
+      </p>
+      <p>
+        My experience spans <strong>financial reconciliation, KPI dashboard development, revenue trend analysis, and executive reporting</strong> — built across a data analyst role, academic research, and an M.Sc. capstone that put DCF modelling and scenario analysis into practice on real financial datasets.
+      </p>
+      <p>
+        I am proactive about <strong>AI-augmented workflows</strong> — applying Python automation and AI-driven analytics tools to reduce manual effort and surface insights faster. I thrive under tight deadlines, communicate clearly across technical and non-technical audiences, and I take ownership of outcomes, not just outputs.
+      </p>
+      <p>
+        I hold a <strong>B.Tech. Honours in Cybersecurity</strong> alongside my data science degree — giving me a rare lens on data governance, control environments, and information integrity that strengthens every financial analysis I deliver.
+      </p>
+    </div>
+    <div class="about-right reveal">
+      <div class="about-pill">
+        <div class="pill-icon">📊</div>
+        <div>
+          <div class="pill-title">Revenue & Performance Analysis</div>
+          <div class="pill-desc">Built forecasting models and KPI monitoring dashboards that gave leadership real-time visibility into performance trends and P&L drivers.</div>
+        </div>
+      </div>
+      <div class="about-pill">
+        <div class="pill-icon">🤖</div>
+        <div>
+          <div class="pill-title">AI-Augmented Finance</div>
+          <div class="pill-desc">Actively uses Python automation, AI analytics tools, and ML-driven feature engineering to accelerate financial processes and improve forecast accuracy.</div>
+        </div>
+      </div>
+      <div class="about-pill">
+        <div class="pill-icon">🎯</div>
+        <div>
+          <div class="pill-title">Executive Reporting & Storytelling</div>
+          <div class="pill-desc">Experienced in translating raw financial data into structured MI reports and visualisations that drive strategic decisions at senior leadership level.</div>
+        </div>
+      </div>
+      <div class="about-pill">
+        <div class="pill-icon">🔒</div>
+        <div>
+          <div class="pill-title">Data Governance & Control</div>
+          <div class="pill-desc">B.Tech. Honours in Cybersecurity informs a deep understanding of data integrity, auditability, and control frameworks in financial environments.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label reveal">Career History</div>
+  <div class="section-title reveal">Where I've made<br><em>impact.</em></div>
+  <div class="exp-timeline">
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Jan 2026 — Present</div>
+        <div class="exp-company">University College Dublin<br>Dublin, Ireland</div>
+      </div>
+      <div class="exp-line"></div>
+      <div class="exp-content">
+        <div class="exp-role">Research Assistant — GreenWatch</div>
+        <div class="exp-ps">
+          <span class="ps-label problem">Problem</span>
+          <div class="ps-text">KPI trend analysis across 50+ global ESG bond issuers was unreliable — datasets arrived in incompatible formats with inconsistent performance targets and untraceable data points, making meaningful cross-issuer reporting impossible.</div>
+          <span class="ps-label solution">Solution</span>
+          <div class="ps-text">Designed standardised data schemas mapping KPIs, sustainability performance targets, and step-up mechanisms to consistent fields with page-level source referencing; built structured MI summaries tracking performance trends across issuers — producing audit-ready, presentation-quality outputs for research leads.</div>
+        </div>
+        <div class="exp-desc">Managed multiple concurrent reporting deliverables under tight deadlines, maintaining accuracy and consistency while presenting findings clearly to senior stakeholders.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">KPI Monitoring</span>
+          <span class="exp-tag">Data Governance</span>
+          <span class="exp-tag">MI Reporting</span>
+          <span class="exp-tag">Stakeholder Presentation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Jan 2025 — Jul 2025</div>
+        <div class="exp-company">Sniper Systems & Solutions<br>Chennai, India</div>
+      </div>
+      <div class="exp-line"></div>
+      <div class="exp-content">
+        <div class="exp-role">Data Analyst</div>
+        <div class="exp-ps">
+          <span class="ps-label problem">Problem</span>
+          <div class="ps-text">Leadership had no reliable visibility into financial performance trends — 100,000+ ERP transactions contained duplicates, missing values, and mismatched account codes that were undermining revenue reporting confidence at year-end close.</div>
+          <span class="ps-label solution">Solution</span>
+          <div class="ps-text">Designed SQL-based validation and reconciliation pipelines to restore data integrity; built automated Power BI KPI dashboards with real-time trend visualisation — contributing to a 15% improvement in performance tracking accuracy for senior decision-makers.</div>
+        </div>
+        <div class="exp-ps">
+          <span class="ps-label problem">Problem</span>
+          <div class="ps-text">Raw financial reports were not translating into clear P&L insights — leadership could not act on the data being presented.</div>
+          <span class="ps-label solution">Solution</span>
+          <div class="ps-text">Created bespoke MI reports presenting revenue trend analyses directly to leadership; leveraged Python automation to reduce manual reporting effort and improve forecast cycle times by eliminating repetitive data preparation steps.</div>
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Revenue Forecasting</span>
+          <span class="exp-tag">SQL</span>
+          <span class="exp-tag">Power BI</span>
+          <span class="exp-tag">Python Automation</span>
+          <span class="exp-tag">P&L Analysis</span>
+          <span class="exp-tag">Executive Reporting</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Feb 2023 — Mar 2023</div>
+        <div class="exp-company">Hilite Technology<br>Chennai, India</div>
+      </div>
+      <div class="exp-line"></div>
+      <div class="exp-content">
+        <div class="exp-role">AI & ML Intern</div>
+        <div class="exp-ps">
+          <span class="ps-label problem">Problem</span>
+          <div class="ps-text">Business forecasting models underperformed because noisy, inconsistently labelled input data was degrading accuracy — limiting their usefulness for resource planning decisions.</div>
+          <span class="ps-label solution">Solution</span>
+          <div class="ps-text">Applied structured data preparation pipelines and AI/ML-driven feature engineering iteratively to improve model accuracy; developed supervised and unsupervised models for business forecasting — building the AI-augmented analytical approach directly transferable to Pinterest's finance team.</div>
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Machine Learning</span>
+          <span class="exp-tag">Python</span>
+          <span class="exp-tag">Feature Engineering</span>
+          <span class="exp-tag">Forecasting</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label reveal">Key Projects</div>
+  <div class="section-title reveal">Built to solve<br><em>real problems.</em></div>
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-num">01</div>
+      <div class="project-title">Revenue Forecasting & Scenario Modelling</div>
+      <div class="project-tools">Python · Excel · DCF · Scenario Analysis</div>
+      <div class="project-desc">
+        Static financial reports provided no forward-looking visibility into revenue performance under different market conditions — making strategic planning reactive rather than proactive.
+        <br><br>
+        Built multi-scenario revenue forecasting models incorporating trend analysis, sensitivity testing, and variance tracking across 10 years of financial data. Modelled bull, base, and bear scenarios with automated recalculation on key assumption changes.
+      </div>
+      <div class="project-outcome">
+        📈 Produced executive-ready outputs aligned with CFO-level reporting standards — directly mirroring Pinterest's revenue and performance management mandate.
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">02</div>
+      <div class="project-title">Automated KPI Monitoring Dashboard</div>
+      <div class="project-tools">Python · SQL · Power BI · ETL Pipeline</div>
+      <div class="project-desc">
+        Manual KPI tracking across multiple financial data sources was error-prone and time-consuming — delaying strategic decisions and reducing confidence in the numbers.
+        <br><br>
+        Designed an end-to-end automated pipeline: SQL for data acquisition and validation, Python for transformation and anomaly flagging, Power BI for real-time KPI visualisation with trend drill-downs and automated alerts for performance deviations.
+      </div>
+      <div class="project-outcome">
+        ⚡ Improved reporting efficiency by 35% — scaling the monitoring of key performance indicators in a way directly aligned with Pinterest's financial process automation goals.
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">03</div>
+      <div class="project-title">ESG Bond KPI Trend Analysis</div>
+      <div class="project-tools">Python · SQL · Structured Data Schemas</div>
+      <div class="project-desc">
+        Cross-issuer KPI comparison across 50+ global ESG bond issuers was impossible due to incompatible data formats, inconsistent naming conventions, and missing source attribution.
+        <br><br>
+        Built standardised schemas mapping sustainability performance targets and step-up mechanisms; produced structured MI trend reports tracking performance deviations and target achievement across issuers.
+      </div>
+      <div class="project-outcome">
+        🎯 Delivered audit-ready, presentation-quality outputs that translated raw multi-source data into actionable insights — mirroring Pinterest's ad hoc analysis and executive reporting requirements.
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">04</div>
+      <div class="project-title">AI-Driven Predictive Model for Business Forecasting</div>
+      <div class="project-tools">Python · scikit-learn · Feature Engineering</div>
+      <div class="project-desc">
+        Business forecasting models were underperforming due to poor input data quality — noisy features and inconsistently labelled records were making outputs unreliable for resource planning decisions.
+        <br><br>
+        Applied supervised and unsupervised ML techniques with structured data preparation pipelines and iterative feature engineering to progressively improve model accuracy; documented methodology for reproducibility.
+      </div>
+      <div class="project-outcome">
+        🤖 Demonstrated the AI-augmented analytical approach Pinterest is actively seeking — proactively applying machine learning where it improves forecast reliability and process efficiency.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label reveal">Capabilities</div>
+  <div class="section-title reveal">Tools I work<br><em>with daily.</em></div>
+  <div class="skills-grid">
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Finance & Modelling</div>
+      <div class="skill-list">
+        <div class="skill-row"><span class="skill-name">Revenue Forecasting</span><div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Financial Modelling</span><div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">KPI & P&L Analysis</span><div class="skill-bar"><div class="skill-fill" data-width="88%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Variance Analysis</span><div class="skill-bar"><div class="skill-fill" data-width="82%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">FP&A</span><div class="skill-bar"><div class="skill-fill" data-width="78%"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Data & Engineering</div>
+      <div class="skill-list">
+        <div class="skill-row"><span class="skill-name">SQL (Advanced)</span><div class="skill-bar"><div class="skill-fill" data-width="92%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Python (pandas, sklearn)</span><div class="skill-bar"><div class="skill-fill" data-width="88%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Advanced Excel</span><div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">ETL Pipelines</span><div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">R</span><div class="skill-bar"><div class="skill-fill" data-width="72%"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Visualisation & AI Tools</div>
+      <div class="skill-list">
+        <div class="skill-row"><span class="skill-name">Power BI</span><div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Tableau</span><div class="skill-bar"><div class="skill-fill" data-width="82%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Amazon QuickSight</span><div class="skill-bar"><div class="skill-fill" data-width="70%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">AI-Augmented Analytics</span><div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">SAP</span><div class="skill-bar"><div class="skill-fill" data-width="65%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label reveal">Academic Background</div>
+  <div class="section-title reveal">Built on strong<br><em>foundations.</em></div>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <span class="edu-badge">Current · 2025 — 2026</span>
+      <div class="edu-degree">M.Sc. Financial Data Science</div>
+      <div class="edu-school">UCD Michael Smurfit Graduate Business School, Dublin</div>
+      <div class="edu-dates">2:1 Expected or Higher</div>
+      <div class="edu-modules">
+        <strong>Capstone:</strong> End-to-end equity valuation using DCF and relative valuation across 10 years of financial data; built multi-scenario revenue models and sensitivity analyses to support investment decisions.
+        <br><br>
+        <strong>Modules:</strong> Financial Analysis · Financial Econometrics · Quantitative Methods · Capital Markets & Instruments · Portfolio & Risk Management
+      </div>
+    </div>
+    <div class="edu-card reveal">
+      <span class="edu-badge">2021 — 2025 · 87%</span>
+      <div class="edu-degree">B.Tech. Computer Science Engineering in Data Science</div>
+      <div class="edu-school">Hindustan Institute of Technology and Science, Chennai</div>
+      <div class="edu-dates">CGPA: 8.94 / 10</div>
+      <div class="edu-modules">
+        <strong>Modules:</strong> Applied Statistical Analysis · Database Management Systems · Business Intelligence · Big Data Analytics · Machine Learning · Artificial Intelligence
+      </div>
+      <div class="honours-badge">🏅 Honours: Cybersecurity</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label reveal">Let's Connect</div>
+  <div class="section-title reveal">Ready to contribute<br><em>from day one.</em></div>
+  <p class="contact-sub reveal">
+    I am actively looking for Sales Finance and FP&A opportunities in Dublin. If you are looking for someone who combines financial rigour with data science depth — let's talk.
+  </p>
+  <div class="contact-links reveal">
+    <a href="mailto:akshayaj0286@gmail.com" class="contact-btn">Email Me</a>
+    <a href="https://linkedin.com/in/akshaya-j28" target="_blank" class="contact-btn outline">LinkedIn →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Akshaya Janakiraman · Dublin, Ireland · <a href="mailto:akshayaj0286@gmail.com">akshayaj0286@gmail.com</a></p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Skill bar animation
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+          bar.style.transform = `scaleX(${parseFloat(bar.dataset.width) / 100})`;
+        });
+        skillObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.skill-group').forEach(g => skillObserver.observe(g));
+
+  // Nav active highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--red)' : '';
+    });
+  });
+</script>
+</body>
+</html>
